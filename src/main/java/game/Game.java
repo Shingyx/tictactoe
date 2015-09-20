@@ -3,33 +3,33 @@ package game;
 import java.util.Arrays;
 
 /**
- * Manages the game state and handles the game logic.
+ * Manages the game state and handles the game logic. Note X always goes first.
  */
 public class Game {
 
-    private char[][] state;
+    private char[][] board;
     private char turn;
 
     /**
      * Constructor for the game.
      */
     public Game() {
-        state = new char[3][3];
+        board = new char[3][3];
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
-                state[row][col] = ' ';
+                board[row][col] = ' ';
             }
         }
         turn = 'x';
     }
 
     /**
-     * Get the state of the game in the form of a 2D array.
+     * Get the board of the game in the form of a 2D array.
      *
-     * @return The state of the game as a 2D array.
+     * @return The board of the game as a 2D array.
      */
-    public char[][] getState() {
-        return state;
+    public char[][] getBoard() {
+        return board;
     }
 
     /**
@@ -42,15 +42,27 @@ public class Game {
     }
 
     /**
-     * Get the state of the game in the form of a string.
+     * Get the board of the game in the form of a string.
      *
-     * @return The state of the game as a string.
+     * @return The board of the game as a string.
      */
-    public String getStateString() {
-        String row1 = Arrays.toString(state[0]);
-        String row2 = Arrays.toString(state[1]);
-        String row3 = Arrays.toString(state[2]);
-        return String.format("%s\n%s\n%s", row1, row2, row3);
+    public String getBoardString() {
+        String row0 = Arrays.toString(board[0]);
+        String row1 = Arrays.toString(board[1]);
+        String row2 = Arrays.toString(board[2]);
+        return String.format("%s\n%s\n%s", row0, row1, row2);
+    }
+
+    /**
+     * Reset the board for a new game.
+     */
+    public void newGame() {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                board[row][col] = ' ';
+            }
+        }
+        turn = 'x';
     }
 
     /**
@@ -63,8 +75,8 @@ public class Game {
     public boolean makeMove(int row, int col) {
         boolean result = false;
 
-        if (state[row][col] == ' ') {
-            state[row][col] = turn;
+        if (board[row][col] == ' ') {
+            board[row][col] = turn;
             if (turn == 'x') {
                 turn = 'o';
             } else {
@@ -73,5 +85,68 @@ public class Game {
             result = true;
         }
         return result;
+    }
+
+    /**
+     * Get the state of the current game based on the points on the baord.
+     *
+     * @return Whether the game is in progress, x has won or o has won.
+     */
+    public GameState calculateState() {
+        GameState result = GameState.IN_PROGRESS;
+        if (checkWin('x')) {
+            result = GameState.X_WIN;
+        } else if (checkWin('o')) {
+            result = GameState.O_WIN;
+        } else if (checkTie()) {
+            result = GameState.TIE;
+        }
+        return result;
+    }
+
+    /**
+     * Check if the input player has won the game.
+     *
+     * @param player The character representation of the player.
+     * @return True if the input player has won.
+     */
+    private boolean checkWin(char player) {
+        boolean result = false;
+        for (int i = 0; i < 3; i++) {
+            // Check the rows
+            if (player == board[i][0] && player == board[i][1] && player == board[i][2]) {
+                result = true;
+                break;
+            }
+            // Check the columns
+            if (player == board[0][i] && player == board[1][i] && player == board[2][i]) {
+                result = true;
+                break;
+            }
+        }
+        if (!result) {
+            // check the diagonals
+            if ((player == board[0][0] && player == board[1][1] && player == board[2][2]) ||
+                    (player == board[0][2] && player == board[1][1] && player == board[2][0])) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Check if the game is a tie.
+     *
+     * @return True if the game is a tie.
+     */
+    private boolean checkTie() {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                if (board[row][col] == ' ') {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
