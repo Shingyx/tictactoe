@@ -20,7 +20,7 @@ public class Game {
                 board[row][col] = ' ';
             }
         }
-        turn = 'x';
+        turn = 'X';
     }
 
     /**
@@ -42,18 +42,6 @@ public class Game {
     }
 
     /**
-     * Get the board of the game in the form of a string.
-     *
-     * @return The board of the game as a string.
-     */
-    public String getBoardString() {
-        String row0 = Arrays.toString(board[0]);
-        String row1 = Arrays.toString(board[1]);
-        String row2 = Arrays.toString(board[2]);
-        return String.format("%s\n%s\n%s", row0, row1, row2);
-    }
-
-    /**
      * Reset the board for a new game.
      */
     public void newGame() {
@@ -62,7 +50,7 @@ public class Game {
                 board[row][col] = ' ';
             }
         }
-        turn = 'x';
+        turn = 'X';
     }
 
     /**
@@ -77,10 +65,10 @@ public class Game {
 
         if (board[row][col] == ' ') {
             board[row][col] = turn;
-            if (turn == 'x') {
-                turn = 'o';
+            if (turn == 'X') {
+                turn = 'O';
             } else {
-                turn = 'x';
+                turn = 'X';
             }
             result = true;
         }
@@ -94,9 +82,9 @@ public class Game {
      */
     public GameState calculateState() {
         GameState result = GameState.IN_PROGRESS;
-        if (checkWin('x')) {
+        if (checkWin('X')) {
             result = GameState.X_WIN;
-        } else if (checkWin('o')) {
+        } else if (checkWin('O')) {
             result = GameState.O_WIN;
         } else if (checkTie()) {
             result = GameState.TIE;
@@ -148,5 +136,18 @@ public class Game {
             }
         }
         return true;
+    }
+
+    /**
+     * Get the board of the game in the form of a string.
+     *
+     * @return The board of the game as a string.
+     */
+    @Override
+    public String toString() {
+        String row0 = Arrays.toString(board[0]);
+        String row1 = Arrays.toString(board[1]);
+        String row2 = Arrays.toString(board[2]);
+        return String.format("%s\n%s\n%s", row0, row1, row2);
     }
 }
