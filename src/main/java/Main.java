@@ -18,8 +18,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Game game;
-
     @FXML
     private Label statusBar;
     @FXML
@@ -41,6 +39,8 @@ public class Main extends Application {
     @FXML
     private Button btnBottomRight;
 
+    private Game game;
+    private Button[][] buttons;
 
     /**
      * Main method to start the application.
@@ -80,20 +80,26 @@ public class Main extends Application {
     }
 
     private void initialiseButtons() {
-        btnTopLeft.setOnMouseClicked(generateButtonCallback(0, 0));
-        btnTopMiddle.setOnMouseClicked(generateButtonCallback(0, 1));
-        btnTopRight.setOnMouseClicked(generateButtonCallback(0, 2));
-        btnMiddleLeft.setOnMouseClicked(generateButtonCallback(1, 0));
-        btnCentre.setOnMouseClicked(generateButtonCallback(1, 1));
-        btnMiddleRight.setOnMouseClicked(generateButtonCallback(1, 2));
-        btnBottomLeft.setOnMouseClicked(generateButtonCallback(2, 0));
-        btnBottomMiddle.setOnMouseClicked(generateButtonCallback(2, 1));
-        btnBottomRight.setOnMouseClicked(generateButtonCallback(2, 2));
+        buttons = new Button[3][3];
+        buttons[0][0] = btnTopLeft;
+        buttons[0][1] = btnTopMiddle;
+        buttons[0][2] = btnTopRight;
+        buttons[1][0] = btnMiddleLeft;
+        buttons[1][1] = btnCentre;
+        buttons[1][2] = btnMiddleRight;
+        buttons[2][0] = btnBottomLeft;
+        buttons[2][1] = btnBottomMiddle;
+        buttons[2][2] = btnBottomRight;
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                buttons[row][col].setOnMouseClicked(generateButtonCallback(row, col));
+            }
+        }
     }
 
-    private EventHandler<? super MouseEvent> generateButtonCallback(int col, int row) {
+    private EventHandler<? super MouseEvent> generateButtonCallback(int row, int col) {
         return event -> {
-            if (game.makeMove(col, row)) {
+            if (game.makeMove(row, col)) {
                 refreshInterface();
             }
         };
@@ -101,15 +107,11 @@ public class Main extends Application {
 
     private void refreshInterface() {
         Player[][] board = game.getBoard();
-        btnTopLeft.setText(String.valueOf(board[0][0]));
-        btnTopMiddle.setText(String.valueOf(board[0][1]));
-        btnTopRight.setText(String.valueOf(board[0][2]));
-        btnMiddleLeft.setText(String.valueOf(board[1][0]));
-        btnCentre.setText(String.valueOf(board[1][1]));
-        btnMiddleRight.setText(String.valueOf(board[1][2]));
-        btnBottomLeft.setText(String.valueOf(board[2][0]));
-        btnBottomMiddle.setText(String.valueOf(board[2][1]));
-        btnBottomRight.setText(String.valueOf(board[2][2]));
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                buttons[row][col].setText(board[row][col].toString());
+            }
+        }
         statusBar.setText(game.getTurn() + "'s turn");
     }
 }
