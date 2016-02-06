@@ -39,15 +39,15 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Button fx:id="btnTopLeft" mnemonicParsing="false" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <Button fx:id="btnMiddleLeft" mnemonicParsing="false" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                <Button fx:id="btnTopMiddle" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <Button fx:id="btnCentre" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                <Button fx:id="btnBottomLeft" mnemonicParsing="false" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                <Button fx:id="btnBottomMiddle" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                <Button fx:id="btnTopRight" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <Button fx:id="btnMiddleRight" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                <Button fx:id="btnBottomRight" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                <Button fx:id="btnTopLeft" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="btnMiddleLeft" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                <Button fx:id="btnTopMiddle" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="btnCentre" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                <Button fx:id="btnBottomLeft" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                <Button fx:id="btnBottomMiddle" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                <Button fx:id="btnTopRight" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Button fx:id="btnMiddleRight" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                <Button fx:id="btnBottomRight" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             </children>
         </GridPane>
       <HBox>
