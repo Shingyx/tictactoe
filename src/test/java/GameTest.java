@@ -1,5 +1,6 @@
 import game.Game;
 import game.GameState;
+import game.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,25 +19,25 @@ public class GameTest {
 
     @Test
     public void testConstructor() {
-        for (char[] row : game.getBoard()) {
-            for (char symbol : row) {
-                assertEquals(' ', symbol);
+        for (Player[] row : game.getBoard()) {
+            for (Player symbol : row) {
+                assertEquals(Player.NONE, symbol);
             }
         }
-        assertEquals('x', game.getTurn());
+        assertEquals(Player.X, game.getTurn());
     }
 
     @Test
     public void testMakeMove() {
         assertTrue(game.makeMove(1, 1));
-        assertEquals('x', game.getBoard()[1][1]);
+        assertEquals(Player.X, game.getBoard()[1][1]);
         assertFalse(game.makeMove(1, 1));
-        assertEquals('x', game.getBoard()[1][1]);
+        assertEquals(Player.X, game.getBoard()[1][1]);
 
         assertTrue(game.makeMove(0, 1));
-        assertEquals('o', game.getBoard()[0][1]);
+        assertEquals(Player.O, game.getBoard()[0][1]);
         assertFalse(game.makeMove(0, 1));
-        assertEquals('o', game.getBoard()[0][1]);
+        assertEquals(Player.O, game.getBoard()[0][1]);
     }
 
     @Test

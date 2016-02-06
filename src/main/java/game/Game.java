@@ -7,20 +7,20 @@ import java.util.Arrays;
  */
 public class Game {
 
-    private char[][] board;
-    private char turn;
+    private Player[][] board;
+    private Player turn;
 
     /**
      * Constructor for the game.
      */
     public Game() {
-        board = new char[3][3];
+        board = new Player[3][3];
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
-                board[row][col] = ' ';
+                board[row][col] = Player.NONE;
             }
         }
-        turn = 'X';
+        turn = Player.X;
     }
 
     /**
@@ -28,7 +28,7 @@ public class Game {
      *
      * @return The board of the game as a 2D array.
      */
-    public char[][] getBoard() {
+    public Player[][] getBoard() {
         return board;
     }
 
@@ -37,7 +37,7 @@ public class Game {
      *
      * @return The player's symbol
      */
-    public char getTurn() {
+    public Player getTurn() {
         return turn;
     }
 
@@ -47,10 +47,10 @@ public class Game {
     public void newGame() {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
-                board[row][col] = ' ';
+                board[row][col] = Player.NONE;
             }
         }
-        turn = 'X';
+        turn = Player.X;
     }
 
     /**
@@ -63,12 +63,12 @@ public class Game {
     public boolean makeMove(int row, int col) {
         boolean result = false;
 
-        if (board[row][col] == ' ') {
+        if (board[row][col] == Player.NONE) {
             board[row][col] = turn;
-            if (turn == 'X') {
-                turn = 'O';
+            if (turn == Player.X) {
+                turn = Player.O;
             } else {
-                turn = 'X';
+                turn = Player.X;
             }
             result = true;
         }
@@ -82,9 +82,9 @@ public class Game {
      */
     public GameState calculateState() {
         GameState result = GameState.IN_PROGRESS;
-        if (checkWin('X')) {
+        if (checkWin(Player.X)) {
             result = GameState.X_WIN;
-        } else if (checkWin('O')) {
+        } else if (checkWin(Player.O)) {
             result = GameState.O_WIN;
         } else if (checkTie()) {
             result = GameState.TIE;
@@ -98,7 +98,7 @@ public class Game {
      * @param player The character representation of the player.
      * @return True if the input player has won.
      */
-    private boolean checkWin(char player) {
+    private boolean checkWin(Player player) {
         boolean result = false;
         for (int i = 0; i < 3; i++) {
             // Check the rows
@@ -130,7 +130,7 @@ public class Game {
     private boolean checkTie() {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
-                if (board[row][col] == ' ') {
+                if (board[row][col] == Player.NONE) {
                     return false;
                 }
             }

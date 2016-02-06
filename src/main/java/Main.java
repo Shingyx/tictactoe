@@ -1,4 +1,5 @@
 import game.Game;
+import game.Player;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -99,7 +100,7 @@ public class Main extends Application {
     }
 
     private void refreshInterface() {
-        char[][] board = game.getBoard();
+        Player[][] board = game.getBoard();
         btnTopLeft.setText(String.valueOf(board[0][0]));
         btnTopMiddle.setText(String.valueOf(board[0][1]));
         btnTopRight.setText(String.valueOf(board[0][2]));
