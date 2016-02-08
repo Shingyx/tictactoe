@@ -11,7 +11,7 @@ public enum Player {
     @Override
     public String toString() {
         if (this == NONE) {
-            return "";
+            return ".";
         }
         return this.name();
     }

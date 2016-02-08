@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 /**
  * Main application.
- * <p>
+ *
  * TODO: make it do something
  */
 public class Main extends Application {

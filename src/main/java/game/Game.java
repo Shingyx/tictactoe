@@ -15,12 +15,7 @@ public class Game {
      */
     public Game() {
         board = new Player[3][3];
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                board[row][col] = Player.NONE;
-            }
-        }
-        turn = Player.X;
+        newGame(Player.X);
     }
 
     /**
@@ -44,7 +39,7 @@ public class Game {
     /**
      * Reset the board for a new game.
      */
-    public void newGame() {
+    public void newGame(Player player) {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 board[row][col] = Player.NONE;
@@ -145,9 +140,15 @@ public class Game {
      */
     @Override
     public String toString() {
-        String row0 = Arrays.toString(board[0]);
-        String row1 = Arrays.toString(board[1]);
-        String row2 = Arrays.toString(board[2]);
-        return String.format("%s\n%s\n%s", row0, row1, row2);
+        StringBuilder builder = new StringBuilder();
+        for (int row = 0; row < 3; row++) {
+            builder.append("[ ");
+            for (int col = 0; col < 3; col++) {
+                builder.append(board[row][col]);
+                builder.append(" ");
+            }
+            builder.append("]\n");
+        }
+        return builder.toString().trim();
     }
 }
