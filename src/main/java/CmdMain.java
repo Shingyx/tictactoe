@@ -61,7 +61,7 @@ public class CmdMain {
     private void gameLoop() {
         System.out.println(game);
         GameState state = game.calculateState();
-        if (state == GameState.IN_PROGRESS) {
+        while (state == GameState.IN_PROGRESS) {
             Player currentTurn = game.getTurn();
             if (currentTurn == Player.X && player == Player.O ||
                     currentTurn == Player.O && player == Player.X) {
@@ -83,10 +83,10 @@ public class CmdMain {
                     move = game.makeMove(row, col);
                 }
             }
-            gameLoop();
-        } else {
-            System.out.println(state.toString());
+            System.out.println(game);
+            state = game.calculateState();
         }
+        System.out.println(state.toString());
     }
 
     private void newGame() {
