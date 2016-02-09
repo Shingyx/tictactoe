@@ -8,6 +8,21 @@ public enum Player {
     X,
     O;
 
+    public Player otherPlayer() {
+        Player result;
+        switch (this) {
+            case X:
+                result = O;
+                break;
+            case O:
+                result = X;
+                break;
+            default:
+                result = NONE;
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         if (this == NONE) {

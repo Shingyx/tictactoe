@@ -15,7 +15,7 @@ public class Game {
      */
     public Game() {
         board = new Player[3][3];
-        newGame(Player.X);
+        newGame();
     }
 
     /**
@@ -39,7 +39,7 @@ public class Game {
     /**
      * Reset the board for a new game.
      */
-    public void newGame(Player player) {
+    public void newGame() {
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 board[row][col] = Player.NONE;
