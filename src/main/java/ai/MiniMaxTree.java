@@ -12,18 +12,12 @@ import java.util.List;
  */
 public class MiniMaxTree {
 
-    private Player[][] currentBoard;
-    private Player currentTurn;
-    private Node tree;
-
     public MiniMaxTree(Player[][] currentBoard, Player currentTurn) {
-        this.currentBoard = currentBoard;
-        this.currentTurn = currentTurn;
-        this.tree = getAllChildren(currentBoard, currentTurn);
+        Node tree = getAllChildren(currentBoard, currentTurn);
     }
 
     private Node getAllChildren(Player[][] board, Player turn) {
-        if (boardIsFull(board)) {
+        if (endOfGame(board)) {
             return new Node(board, computeScore(board, turn));
         }
         List<Node> nodes = new ArrayList<>();
@@ -70,23 +64,38 @@ public class MiniMaxTree {
         };
     }
 
-    private boolean boardIsFull(Player[][] board) {
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                if (board[row][col] == Player.NONE) {
-                    return false;
-                }
+    private boolean endOfGame(Player[][] board) {
+        int[][] lines = {
+                {0, 1, 2}, {3, 4, 5}, {6, 7, 8},
+                {0, 3, 6}, {1, 4, 7}, {2, 5, 8},
+                {0, 4, 8}, {2, 4, 6}
+        };
+        for (int[] line : lines) {
+            Player pos0 = board[line[0] / 3][line[0] % 3];
+            Player pos1 = board[line[1] / 3][line[1] % 3];
+            Player pos2 = board[line[2] / 3][line[2] % 3];
+            if (pos0 != Player.NONE && pos0 == pos1 && pos0 == pos2) {
+                // A player won
+                return true;
             }
         }
+        for (int i = 0; i < 9; i++) {
+            if (board[i / 3][i % 3] == Player.NONE) {
+                // Game still in progress
+                return false;
+            }
+        }
+        // Tie
         return true;
     }
 
     private int getScoreForOneLine(Player[] values, Player currentTurn) {
-        int countX = 0, countO = 0;
-        for (Player v : values) {
-            if (v == Player.X) {
+        int countX = 0;
+        int countO = 0;
+        for (Player value : values) {
+            if (value == Player.X) {
                 countX++;
-            } else if (v == Player.O) {
+            } else if (value == Player.O) {
                 countO++;
             }
         }

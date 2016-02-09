@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class Node {
     private Player[][] board;
+    private Node nextNode;
     private int value;
     private ArrayList<Node> children;
 
@@ -33,13 +34,28 @@ public class Node {
         this.children = new ArrayList<>(nodes);
     }
 
+    public Player[][] getNextBoard(Player player) {
+        if (player == Player.X) {
+            maxValue(Integer.MIN_VALUE, Integer.MAX_VALUE);
+        } else if (player == Player.O) {
+            minValue(Integer.MIN_VALUE, Integer.MAX_VALUE);
+        } else {
+            throw new IllegalArgumentException();
+        }
+        return nextNode.board;
+    }
+
     private int maxValue(int alpha, int beta) {
         if (children.size() == 0) {
             return this.value;
         }
         int result = Integer.MIN_VALUE;
         for (Node node : children) {
-            result = Math.max(result, node.minValue(alpha, beta));
+            int value = node.minValue(alpha, beta);
+            if (value > result) {
+                result = value;
+                this.nextNode = node;
+            }
             if (result >= beta) {
                 break;
             }
@@ -54,7 +70,11 @@ public class Node {
         }
         int result = Integer.MAX_VALUE;
         for (Node node : children) {
-            result = Math.min(result, node.maxValue(alpha, beta));
+            int value = node.maxValue(alpha, beta);
+            if (value < result) {
+                result = value;
+                this.nextNode = node;
+            }
             if (result <= alpha) {
                 break;
             }
@@ -68,7 +88,7 @@ public class Node {
         if (children.size() == 0) {
             return String.valueOf(this.value);
         } else {
-            return "[" + children.toString() + "]";
+            return children.toString();
         }
     }
 }
