@@ -67,11 +67,7 @@ public class CmdMain {
             if (currentTurn == Player.X && player == Player.O ||
                     currentTurn == Player.O && player == Player.X) {
                 System.out.println("AI turn");
-                // temp input own commands
-                MiniMaxTree x = new MiniMaxTree(game.getBoard(), currentTurn);
-                int row = scanner.nextInt();
-                int col = scanner.nextInt();
-                game.makeMove(row, col);
+                game.makeAiMove();
             } else {
                 System.out.println("Your turn");
                 int row = scanner.nextInt();

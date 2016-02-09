@@ -12,8 +12,15 @@ import java.util.List;
  */
 public class MiniMaxTree {
 
+    Player[][] nextBoard;
+
     public MiniMaxTree(Player[][] currentBoard, Player currentTurn) {
         Node tree = getAllChildren(currentBoard, currentTurn);
+        nextBoard = tree.getNextBoard(currentTurn);
+    }
+
+    public Player[][] getNextBoard() {
+        return nextBoard;
     }
 
     private Node getAllChildren(Player[][] board, Player turn) {

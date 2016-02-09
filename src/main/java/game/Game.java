@@ -1,5 +1,7 @@
 package game;
 
+import ai.MiniMaxTree;
+
 import java.util.Arrays;
 
 /**
@@ -68,6 +70,19 @@ public class Game {
             result = true;
         }
         return result;
+    }
+
+    /**
+     * Make an AI move.
+     */
+    public void makeAiMove() {
+        MiniMaxTree miniMaxTree = new MiniMaxTree(board, turn);
+        board = miniMaxTree.getNextBoard();
+        if (turn == Player.X) {
+            turn = Player.O;
+        } else {
+            turn = Player.X;
+        }
     }
 
     /**
