@@ -15,25 +15,44 @@ public class CmdMain {
 
     public static void main(String[] args) {
         CmdMain main = new CmdMain();
-        main.initialise();
+        Player player = Player.NONE;
+        if (args.length > 0) {
+            switch (args[0].trim().toUpperCase()) {
+                case "X":
+                    player = Player.X;
+                    break;
+                case "O":
+                    player = Player.O;
+                    break;
+                default:
+                    System.err.println("Invalid argument");
+                    return;
+            }
+        }
+        main.initialise(player);
     }
 
-    private void initialise() {
+    private void initialise(Player player) {
         scanner = new Scanner(System.in);
-        System.out.println("Choose a player to be: X or O");
-        String input = scanner.next();
-        input = input.trim().toUpperCase();
-        switch (input) {
-            case "X":
-                player = Player.X;
-                break;
-            case "O":
-                player = Player.O;
-                break;
-            default:
-                System.err.println("Invalid input");
-                return;
+        if (player != Player.NONE) {
+            this.player = player;
+        } else {
+            System.out.println("Choose a player to be: X or O");
+            String input = scanner.next();
+            input = input.trim().toUpperCase();
+            switch (input) {
+                case "X":
+                    this.player = Player.X;
+                    break;
+                case "O":
+                    this.player = Player.O;
+                    break;
+                default:
+                    System.err.println("Invalid input");
+                    return;
+            }
         }
+        System.out.println("You are player " + this.player.name());
         System.out.println("To play, type in row and column, e.g. '0 2' for top right corner, when prompted to do so");
         newGame();
         gameLoop();

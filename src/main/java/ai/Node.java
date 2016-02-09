@@ -7,7 +7,7 @@ import java.util.Collections;
  * Node for the MiniMax algorithm.
  */
 public class Node {
-    private int value = -1;
+    private int value;
     private ArrayList<Node> children;
 
     public Node(int value) {
@@ -16,7 +16,7 @@ public class Node {
     }
 
     public Node(Node... nodes) {
-        this.value = -1;
+        this.value = 0;
         this.children = new ArrayList<>();
         Collections.addAll(children, nodes);
     }
