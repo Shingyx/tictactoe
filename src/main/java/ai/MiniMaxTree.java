@@ -3,7 +3,9 @@ package ai;
 import game.Player;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Generate MiniMax tree for the AI.
@@ -12,11 +14,23 @@ public class MiniMaxTree {
 
     private Player[][] currentBoard;
     private Player currentTurn;
+    private Node tree;
 
     public MiniMaxTree(Player[][] currentBoard, Player currentTurn) {
         this.currentBoard = currentBoard;
         this.currentTurn = currentTurn;
-        computeScore(currentBoard, currentTurn);
+        this.tree = getAllChildren(currentBoard, currentTurn);
+    }
+
+    private Node getAllChildren(Player[][] board, Player turn) {
+        if (boardIsFull(board)) {
+            return new Node(board, computeScore(board, turn));
+        }
+        List<Node> nodes = new ArrayList<>();
+        for (Player[][] nextBoard : getChildren(board, turn)) {
+            nodes.add(getAllChildren(nextBoard, turn.otherPlayer()));
+        }
+        return new Node(board, nodes);
     }
 
     public Iterable<Player[][]> getChildren(Player[][] board, Player turn) {
@@ -54,6 +68,17 @@ public class MiniMaxTree {
                 throw new NotImplementedException();
             }
         };
+    }
+
+    private boolean boardIsFull(Player[][] board) {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                if (board[row][col] == Player.NONE) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private int getScoreForOneLine(Player[] values, Player currentTurn) {

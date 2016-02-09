@@ -1,24 +1,36 @@
 package ai;
 
+import game.Player;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Node for the MiniMax algorithm.
  */
 public class Node {
+    private Player[][] board;
     private int value;
     private ArrayList<Node> children;
 
-    public Node(int value) {
+    public Node(Player[][] board, int value) {
+        this.board = board;
         this.value = value;
         this.children = new ArrayList<>();
     }
 
-    public Node(Node... nodes) {
+    public Node(Player[][] board, Node... nodes) {
+        this.board = board;
         this.value = 0;
         this.children = new ArrayList<>();
         Collections.addAll(children, nodes);
+    }
+
+    public Node(Player[][] board, List<Node> nodes) {
+        this.board = board;
+        this.value = 0;
+        this.children = new ArrayList<>(nodes);
     }
 
     private int maxValue(int alpha, int beta) {
