@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class MiniMaxTree {
 
-    Player[][] nextBoard;
+    private Player[][] nextBoard;
 
     public MiniMaxTree(Player[][] currentBoard, Player currentTurn) {
         Node tree = getAllChildren(currentBoard, currentTurn);
@@ -34,7 +34,7 @@ public class MiniMaxTree {
         return new Node(board, nodes);
     }
 
-    public Iterable<Player[][]> getChildren(Player[][] board, Player turn) {
+    private Iterable<Player[][]> getChildren(Player[][] board, Player turn) {
         return () -> new Iterator<Player[][]>() {
             int current = 0;
 
