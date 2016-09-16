@@ -2,8 +2,6 @@ package game;
 
 import ai.MiniMaxTree;
 
-import java.util.Arrays;
-
 /**
  * Manages the game state and handles the game logic. Note X always goes first.
  */
@@ -86,7 +84,7 @@ public class Game {
     }
 
     /**
-     * Get the state of the current game based on the points on the baord.
+     * Get the state of the current game based on the points on the board.
      *
      * @return Whether the game is in progress, x has won or o has won.
      */

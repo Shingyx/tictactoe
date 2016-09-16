@@ -9,6 +9,9 @@ import java.util.List;
 
 /**
  * Generate MiniMax tree for the AI.
+ *
+ * Heuristic scoring was taken from
+ * http://www.codeproject.com/Articles/43622/Solve-Tic-Tac-Toe-with-the-MiniMax-algorithm
  */
 public class MiniMaxTree {
 
@@ -106,7 +109,7 @@ public class MiniMaxTree {
                 countO++;
             }
         }
-        //The player who has turn should have more advantage.
+        // The player who has turn should have more advantage.
         int advantage = 1;
         int result = 0;
         if (countO == 0) {
